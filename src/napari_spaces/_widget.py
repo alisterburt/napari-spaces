@@ -10,7 +10,7 @@ import napari
 import numpy as np
 from magicgui import magic_factory
 from napari.layers import Image, Points
-from qtpy.QtWidgets import QHBoxLayout, QLineEdit, QWidget
+from qtpy.QtWidgets import QLabel, QLineEdit, QVBoxLayout, QWidget
 
 
 class SpaceWidget(QWidget):
@@ -28,20 +28,26 @@ class SpaceWidget(QWidget):
             ],
         }
 
-        self.text_box = QLineEdit("Click me!")
+        explanation = QLabel("write 'first' or 'second' below")
+        self.text_box = QLineEdit("space name")
         self.text_box.textChanged.connect(self._on_text_change)
 
-        self.setLayout(QHBoxLayout())
+        self.setLayout(QVBoxLayout())
+        self.layout().addWidget(explanation)
         self.layout().addWidget(self.text_box)
 
     @property
-    def space(self):
+    def active_space(self):
         return self.text_box.text()
 
+    @active_space.setter
+    def active_space(self, value: str):
+        self.text_box.setText(value)
+
     def _on_text_change(self):
-        if self.space in self.spaces:
+        if self.active_space in self.spaces:
             self.viewer.layers.clear()
-            self.viewer.layers.extend(self.spaces[self.space])
+            self.viewer.layers.extend(self.spaces[self.active_space])
 
 
 @magic_factory
