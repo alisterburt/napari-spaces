@@ -1,21 +1,10 @@
 name: napari-spaces
 display_name: napari spaces
 contributions:
-  commands: 
-    - id: napari-spaces.make_qwidget
-      python_name: napari_spaces._widget:ExampleQWidget
-      title: Make example QWidget
-    - id: napari-spaces.make_magic_widget
-      python_name: napari_spaces._widget:example_magic_widget
-      title: Make example magic widget
-    - id: napari-spaces.make_func_widget
-      python_name: napari_spaces._widget:example_function_widget
-      title: Make example function widget   
+  commands:
+    - id: napari-spaces.make_space_widget
+      python_name: napari_spaces._widget:SpaceWidget
+      title: Make space widget
   widgets:
-    - command: napari-spaces.make_qwidget
-      display_name: Example QWidget
-    - command: napari-spaces.make_magic_widget
-      display_name: Example Magic Widget
-    - command: napari-spaces.make_func_widget
-      autogenerate: true
-      display_name: Example Function Widget 
+    - command: napari-spaces.make_space_widget
+      display_name: space widget
